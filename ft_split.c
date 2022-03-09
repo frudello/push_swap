@@ -6,7 +6,7 @@
 /*   By: frudello < frudello@student.42roma.it>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/16 16:33:44 by frudello          #+#    #+#             */
-/*   Updated: 2022/03/08 15:32:06 by frudello         ###   ########.fr       */
+/*   Updated: 2022/03/09 19:14:27 by frudello         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,11 +33,11 @@ static int	ft_wordlen(char *str, char *charset)
 	return (i);
 }
 
-static int	ft_wordcount(char *str, char *charset)
+int	ft_wordcount(char *str, char *charset)
 {
-	int	i;
-	int	j;
-
+	int		i;
+	int		j;
+		
 	j = 0;
 	while (*str)
 	{

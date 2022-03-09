@@ -1,3 +1,16 @@
+#include "push_swap.h"
+
+int in_int(long long int rs)
+{
+	if (rs < -2147483648 || rs > 2147483647)
+	{
+		write(2, "error\n", 6);
+		exit(1);
+	}
+	return (rs);
+}
+
+
 int	ft_atoi(const char *str)
 {
 	int	c;
@@ -21,6 +34,6 @@ int	ft_atoi(const char *str)
 		res = (res * 10) + (str[c] - '0');
 		c++;
 	}
-	return (res * s);
+	return (in_int(res * s));
 }
 
