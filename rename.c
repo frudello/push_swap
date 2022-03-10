@@ -6,7 +6,7 @@
 /*   By: frudello < frudello@student.42roma.it>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/07 14:14:32 by frudello          #+#    #+#             */
-/*   Updated: 2022/03/10 11:40:04 by frudello         ###   ########.fr       */
+/*   Updated: 2022/03/10 18:07:54 by frudello         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -215,7 +215,29 @@ int main(int argc, char **argv)
 		printf("%d\n", stack.a[i]);
 		i++;
 	}
+	printf("\nfinito\n");
+	//swap_a(&stack);
+	i = 0;
+	// while (i < stack.size_a)
+	// {
+	// 	printf("%d\n", stack.a[i]);
+	// 	i++;
+	// }
 	
-		
+	push_b(&stack);
+	printf("usciamo la a\n");
+	while (i < stack.size_a)
+	{
+		printf("%d\n", stack.a[i]);
+		i++;
+	}
+	printf("usciamo il b\n");
+	i = 0;
+	while (i < stack.size_b)
+	{
+		printf("%d\n", stack.b[i]);
+		i++;
+	}
+	return(0);		
 
 }

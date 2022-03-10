@@ -6,7 +6,7 @@
 #    By: frudello < frudello@student.42roma.it>     +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/01/10 12:36:05 by frudello          #+#    #+#              #
-#    Updated: 2022/03/10 10:41:39 by frudello         ###   ########.fr        #
+#    Updated: 2022/03/10 16:59:11 by frudello         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -18,6 +18,7 @@ CFLAGS	= -Wall -Wextra -Werror -g
 PUSH_SRCS =	funzionilibft.c								\
 			ft_split.c									\
 			rename.c									\
+			mosse.c										\
 
 PUSH_OBJS	= ${PUSH_SRCS:.c=.o}
 
