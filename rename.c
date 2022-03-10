@@ -6,7 +6,7 @@
 /*   By: frudello < frudello@student.42roma.it>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/07 14:14:32 by frudello          #+#    #+#             */
-/*   Updated: 2022/03/09 19:08:42 by frudello         ###   ########.fr       */
+/*   Updated: 2022/03/10 11:40:04 by frudello         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,49 +16,47 @@
 
 void s_nbr(char **contr)
 {
-    int i;
-    int j;
-    
-    j = 1;
-    while(contr[j])
-    {
-        i = 0;
-        while(contr[j][i])
-        {
-            if(!(contr[j][i] == '-' || contr[j][i] == '+' || contr[j][i] == ' ' || (contr[j][i] > 39 && contr[j][i] < 58)))
-            {
-                printf("errore\n");
-                exit(1);
-            }
-            else if(contr[j][i] == '-' || contr[j][i] == '+')
-            {
-                if(contr[j][i+1] == '-' || contr[j][i+1] == '+')
-                {
-                    printf("errore\n");
-                    exit(1);
-                }
-            }
-            i++;
-        }
-        j++;
-    }
+	int i;
+	int j;
+	
+	j = 1;
+	while(contr[j])
+	{
+		i = 0;
+		while(contr[j][i])
+		{
+			if(!(contr[j][i] == '-' || contr[j][i] == '+' || contr[j][i] == ' ' || (contr[j][i] > 39 && contr[j][i] < 58)))
+			{
+				printf("errore\n");
+				exit(1);
+			}
+			else if(contr[j][i] == '-' || contr[j][i] == '+')
+			{
+				if(contr[j][i+1] == '-' || contr[j][i+1] == '+')
+				{
+					printf("errore\n");
+					exit(1);
+				}
+			}
+			i++;
+		}
+		j++;
+	}
 }
 
-// int e_str(char *contr)
-// {
-//     int j;
-    
-//     j = 1;
-//     while(contr[j])
-//     {
-//         else if(contr[j] == ' ')
-//         {
-//             return(1);
-//         }
-//         j++;
-//     }
-//     return (0);
-// }
+int has_space(char *str)
+{
+    int j;
+	
+    j = 1;
+    while(str[j])
+    {
+        if(str[j] == ' ')
+            return(1);
+        j++;
+    }
+    return (0);
+}
 
 // int counter(char **numeri)
 // {
@@ -66,7 +64,7 @@ void s_nbr(char **contr)
 //     char **count;
 
 //     count = i
-    
+	
 //     contatore = 0;
 //     j = 1;
 //     while(numeri[j])
@@ -93,7 +91,7 @@ void s_nbr(char **contr)
 //     while(bho[i])
 //     {
 //         temp = ft_split(bho[i])
-        
+		
 //     }
 // }
 
@@ -101,11 +99,11 @@ void s_nbr(char **contr)
 // {
 //     int counter;
 //     int *a;
-    
+	
 //     counter = 0;
 //     if(s_nbr(test))
 //     {
-        
+		
 //         a = malloc(counter - 1);
 //         counter = 1;
 //         while(test[counter])
@@ -117,52 +115,107 @@ void s_nbr(char **contr)
 //     }
 // }
 
+
+
+/*
 void parsing_argument(t_stack *stack, char **argv)
 {
-    int i;
-    int y;
-    int j;
+	int i;
+	int y;
+	int j;
 
 
-    i = 0;
-    y = 0;
-    j = 0;
-    s_nbr(argv);
-    while (argv[i])
-    {
-        stack->count += ft_wordcount(argv[i], " ");
-        i++;
-    }
-    stack->count--;
-    stack->a = malloc(stack->count * sizeof(int));
-    stack->b = malloc(stack->count * sizeof(int));
-    stack->size_a = stack->count;
-    i = 0;
-    while(argv[i])
-    {
-        stack->temp = ft_split(argv[i], ' ');
-        y = 0;
-        while(stack->temp[y])
-        {
-            stack->a[j] = ft_atoi(stack->temp[y]);
-            j++;
-            y++;
-        }
-        i++;
-    }
+	i = 0;
+	y = 0;
+	j = 0;
+	s_nbr(argv);
+	while (argv[i])
+	{
+		stack->count += ft_wordcount(argv[i], " ");
+		i++;
+	}
+	stack->count--;
+	stack->a = malloc(stack->count * sizeof(int));
+	stack->b = malloc(stack->count * sizeof(int));
+	stack->size_a = stack->count;
+	i = 0;
+	while(argv[i])
+	{
+		stack->temp = ft_split(argv[i], ' ');
+		y = 0;
+		while(stack->temp[y])
+		{
+			stack->a[j] = ft_atoi(stack->temp[y]);
+			j++;
+			y++;
+		}
+		i++;
+	}
+}
+*/
+
+int	filler_helper(t_stack *stack, char *argv, int k)
+{
+	char	**split;
+	int		i;
+	
+	i = 0;
+	split = ft_split(argv, ' ');
+	while (split[i])
+	{
+		stack->a[k] = ft_atoi(split[i]);
+		i++;
+		k++;
+	}
+	return (k - 1);
+}
+
+void parsing_argument(t_stack *stack, char **argv, int argc)
+{
+	int i;
+	int k;
+	
+	i = 1;
+	k = 0;
+	stack->count = 0;
+	s_nbr(argv);
+	while (i < argc)
+	{
+		if (has_space(argv[i]))
+			stack->count += ft_wordcount(argv[i], " ");
+		else
+			stack->count++;
+		i++;
+	}
+	stack->a = malloc(stack->count * sizeof(int));
+	stack->b = malloc(stack->count * sizeof(int));
+	stack->size_a = stack->count;
+	i = 1;
+	while(i < argc)
+	{
+		if (has_space(argv[i]))
+			k = filler_helper(stack, argv[i], k);
+		else
+			stack->a[k] = ft_atoi(argv[i]);
+		i++;
+		k++;
+	}
 }
 
 int main(int argc, char **argv)
 {
-    int i = 0;
-    (void) argc;
-    t_stack stack;
-    parsing_argument(&stack, argv);
-    while (stack.a[i])
-    {
-        printf("%d\n", stack.a[i]);
-    }
-    
-        
+	int i = 0;
+	(void) argc;
+	t_stack stack;
+	
+	parsing_argument(&stack, argv, argc);
+	printf("Size: %d\n", stack.size_a);
+	while (i < stack.size_a)
+	{
+		printf("%d\n", stack.a[i]);
+		i++;
+	}
+	
+		
 
 }

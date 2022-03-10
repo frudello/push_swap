@@ -6,29 +6,37 @@
 #    By: frudello < frudello@student.42roma.it>     +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/01/10 12:36:05 by frudello          #+#    #+#              #
-#    Updated: 2022/03/09 19:01:15 by frudello         ###   ########.fr        #
+#    Updated: 2022/03/10 10:41:39 by frudello         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
-NAME = push_swap
-SRCS = ft_split.c 	\
-		rename.c	\
-		funzionilibft.c
-		
+NAME_PUSH	= push_swap
 
-OBJS	= $(SRCS:.c=.o)
-RM		= rm -f
-LIBC	= ar -rcs
-FLAGS	= -Wall -Wextra -Werror
-INCS	= .
-.c.o :
-	${CC} ${FLAGS} -c $< -o ${<:.c=.o} -I${INCS}
-$(NAME): ${OBJS}
-	${LIBC} $(NAME) $(OBJS)
-all: $(NAME)
+CC 		= gcc
+CFLAGS	= -Wall -Wextra -Werror -g
 
-fclean: clean
-	$(RM) $(NAME)
+PUSH_SRCS =	funzionilibft.c								\
+			ft_split.c									\
+			rename.c									\
+
+PUSH_OBJS	= ${PUSH_SRCS:.c=.o}
+
+%.o: %.c
+			$(CC) ${CFLAGS} -c $< -o $@ 
+
+all:		push_swap
+
+push_swap:  ${PUSH_OBJS}
+			$(CC) ${CFLAGS} -o ${NAME_PUSH} ${PUSH_OBJS}
+
 clean:
-	$(RM) -f $(OBJS)
+			rm -f *.o
+			rm -f ./*/*.o
+
+fclean: 	clean
+			rm -f $(NAME_PUSH)
+			rm -f $(NAME_CHECKER)
+
 re: fclean all
+
+.PHONY: all clean fclean re push_swap
