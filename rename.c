@@ -6,7 +6,7 @@
 /*   By: frudello < frudello@student.42roma.it>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/07 14:14:32 by frudello          #+#    #+#             */
-/*   Updated: 2022/03/10 18:07:54 by frudello         ###   ########.fr       */
+/*   Updated: 2022/03/12 18:44:13 by frudello         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -164,9 +164,11 @@ int	filler_helper(t_stack *stack, char *argv, int k)
 	while (split[i])
 	{
 		stack->a[k] = ft_atoi(split[i]);
+		free(split[i]);
 		i++;
 		k++;
 	}
+	free(split);
 	return (k - 1);
 }
 
@@ -223,8 +225,25 @@ int main(int argc, char **argv)
 	// 	printf("%d\n", stack.a[i]);
 	// 	i++;
 	// }
-	
-	push_b(&stack);
+	rra(&stack);
+	printf("usciamo la a post ra\n");
+	while (i < stack.size_a)
+	{
+		printf("%d\n", stack.a[i]);
+		i++;
+	}
+	/*
+	printf("usciamo il b\n");
+	i = 0;
+	while (i < stack.size_b)
+	{
+		printf("%d\n", stack.b[i]);
+		i++;
+	}
+	push_a(&stack);
+	push_a(&stack);
+	push_a(&stack);
+	i = 0;
 	printf("usciamo la a\n");
 	while (i < stack.size_a)
 	{
@@ -237,7 +256,8 @@ int main(int argc, char **argv)
 	{
 		printf("%d\n", stack.b[i]);
 		i++;
-	}
-	return(0);		
-
+	}*/
+	free(stack.a);
+	free(stack.b);
+	return(0);
 }

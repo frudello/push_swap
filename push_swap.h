@@ -6,7 +6,7 @@
 /*   By: frudello < frudello@student.42roma.it>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/09 15:02:10 by frudello          #+#    #+#             */
-/*   Updated: 2022/03/10 17:54:52 by frudello         ###   ########.fr       */
+/*   Updated: 2022/03/13 17:59:32 by frudello         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,10 @@ typedef struct s_stack
 	int		size_a;
 	int		size_b;
 	char	**temp;
-}			t_stack;
+	int		max_int_liss;
+	int		*lis;
+	int		*lis_flag;
+	}			t_stack;
 
 char		**ft_split(char const *s, char c);
 int			ft_atoi(const char *str);
