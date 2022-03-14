@@ -6,7 +6,7 @@
 /*   By: frudello < frudello@student.42roma.it>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/09 15:02:10 by frudello          #+#    #+#             */
-/*   Updated: 2022/03/13 17:59:32 by frudello         ###   ########.fr       */
+/*   Updated: 2022/03/14 15:39:39 by frudello         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,6 +22,8 @@ typedef struct s_stack
 {
 	int		*a;
 	int		*b;
+	int		*na;
+	int		*nb;
 	int		count;
 	int		size_a;
 	int		size_b;
