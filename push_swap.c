@@ -6,7 +6,7 @@
 /*   By: frudello < frudello@student.42roma.it>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/07 14:13:32 by frudello          #+#    #+#             */
-/*   Updated: 2022/03/14 17:27:46 by frudello         ###   ########.fr       */
+/*   Updated: 2022/03/15 20:15:37 by frudello         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -106,7 +106,83 @@ void fill_nb(t_stack *stack)
 	}
 }
 
-void what_a_n(t_stack *stack)
+void fill_na(t_stack *stack)
 {
+	int i;
+	int o;
 	
+	o = 0;	
+	i  = 0;
+	while(stack->b[i] > stack->a[o])
+		o++;
+	if(o > stack->size_a/2)
+		o -= stack->size_a - 1;
+	stack->na[i] = o;
+}
+
+int what_a_n(t_stack *stack)
+{
+	int i;
+	int save;
+	int tmp;
+	
+	save = 0;
+	i = 0;
+	while(stack->na[i])
+	{
+		monentaneo = how_many(stack, i);
+		if(tmp < 0)
+			tmp *= -1;
+		if(save > tmp)
+			save = i;
+		i++;
+	}
+	return(save);
+}
+
+void how_many(t_stack *stack, int i)
+{
+	int tmp;
+	
+	tmp = 0;
+	if(stack->na[i] > 0 && stack->nb[i] > 0)
+		{
+			if(stack->na[i] > stack->nb[i])
+				tmp = stack->na[i];
+			else
+				tmp = stack->nb[i];
+		}
+		if(stack->na[i] < 0 && stack->nb[i] < 0)
+		{
+			if(stack->na[i] < stack->nb[i])
+				tmp = stack->na[i];
+			else
+				tmp = stack->nb[i];
+		}
+		if(stack->na[i] < 0 && stack->nb[i] > 0)
+			tmp = (stack->na[i] * -1) + stack->nb[i];
+		if(stack->na[i] > 0 && stack->nb[i] < 0)
+			tmp = stack->na[i] + (stack->nb[i] * -1);
+		return(tmp);
+}
+
+void sistemiamolo(t_stack *stack)
+{
+	int i;
+
+	i = what_a_n(stack);
+	if(stack->na[i] > 0 && stack->nb[i] > 0)
+	{
+		if(stack->na[i] > stack->nb[i])
+		{
+			while(stack->nb[i] > 0)
+			{
+				rr(stack);
+				stack->na[i] 
+				stack->nb[i]
+		}
+	}
+	if(stack->na[i] < 0 && stack->nb[i] < 0)
+	if(stack->na[i] < 0 && stack->nb[i] > 0)
+	if(stack->na[i] > 0 && stack->nb[i] < 0)
 }
