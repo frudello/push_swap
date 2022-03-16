@@ -6,7 +6,7 @@
 /*   By: frudello < frudello@student.42roma.it>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/07 14:13:32 by frudello          #+#    #+#             */
-/*   Updated: 2022/03/15 20:15:37 by frudello         ###   ########.fr       */
+/*   Updated: 2022/03/16 19:24:41 by frudello         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -113,11 +113,19 @@ void fill_na(t_stack *stack)
 	
 	o = 0;	
 	i  = 0;
-	while(stack->b[i] > stack->a[o])
-		o++;
-	if(o > stack->size_a/2)
-		o -= stack->size_a - 1;
-	stack->na[i] = o;
+	while(i < stack->size_b)
+	{
+		while(stack->b[i] > stack->a[o]) //sbagliato da rivedere, se non parto a vedere al numero piu piccolo non posso considerarla corretta
+			if(check(stack, i))
+			{
+				
+			}
+			o++;
+		if(o > stack->size_a/2)
+			o -= stack->size_a - 1;
+		stack->na[i] = o;
+		i++;
+	}
 }
 
 int what_a_n(t_stack *stack)
@@ -166,23 +174,173 @@ void how_many(t_stack *stack, int i)
 		return(tmp);
 }
 
+void pusch_svap(t_stack *stack)
+{
+	int i;
+	
+	i = 0;
+	while(stack->size_b > 0)
+		sistemiamolo(stack);
+		
+}
+
+int check(t_stack *stack, int i)
+{
+	int o;
+	
+	o = 0;
+	while(o < stack->size_a)
+	{
+		if(stack->b[i] > stack->a[o])
+			return(0);
+		o++;
+	}
+}
+
 void sistemiamolo(t_stack *stack)
+{
+	int i;
+	
+	i = what_a_n(stack);
+	if(stack->na[i] > 0 && stack->nb[i] > 0)
+	{
+		if(stack->na[i] < stack->nb[i])
+			sistemiamolo_rr_ra(stack);
+		else
+			sistemiamolo_rr_rb(stack);
+	}
+	if(stack->na[i] < 0 && stack->nb[i] < 0)
+	{
+		if(stack->na[i] < stack->nb[i])
+			sistemiamolo_rrr_rrb(stack);
+		else
+			siatemiamolo_rrr_rra(stack);
+	}
+	if(stack->na[i] < 0 && stack->nb[i] > 0)
+		siatemiamolo_rra_rb(stack);
+	if(stack->na[i] > 0 && stack->nb[i] < 0)
+		siatemiamolo_ra_rrb(stack);
+}
+
+void sistemiamolo_rr_ra(t_stack *stack)
 {
 	int i;
 
 	i = what_a_n(stack);
-	if(stack->na[i] > 0 && stack->nb[i] > 0)
+	while(stack->nb[i] >= 0)
 	{
-		if(stack->na[i] > stack->nb[i])
-		{
-			while(stack->nb[i] > 0)
-			{
-				rr(stack);
-				stack->na[i] 
-				stack->nb[i]
-		}
+		rr(stack);
+		stack->na[i]--; 
+		stack->nb[i]--;
 	}
-	if(stack->na[i] < 0 && stack->nb[i] < 0)
+	while(stack->na[i] >= 0)
+	{
+		ra(stack);
+		stack->na[i]--;
+	}
+	push_a(stack);
+	}
+
+}
+
+void sistemiamolo_rr_rb(t_stack *stack)
+{
+	int i;
+
+	i = what_a_n(stack);
+	while(stack->na[i] >= 0)
+	{
+		rr(stack);
+		stack->na[i]--;
+		stack->nb[i]--;
+	}
+	while(stack->nb[i] >= 0)
+	{
+		rb(stack);
+		stack->nb[i]--;
+	}
+	push_a(stack);
+}
+
+void siatemiamolo_rrr_rra(t_stack *stack)
+{
+	int i;
+	
+	i = what_a_n(stack);
+	stack->na[i] *= -1;
+	stack->nb[i] *= -1;
+	while(stack->nb[i] >= 0)
+	{
+		rrr(stack);
+		stack->na[i]--;
+		stack->nb[i]--;
+	}
+	while(stack->na[i] >= 0)
+	{
+		rrb(stack);
+		stack->na[i]--;
+	}
+	push_a(stack);
+}
+
+void sistemiamolo_rrr_rrb(t_stack *stack)
+{
+	int i;
+
+	i = what_a_n(stack);
+	stack->na[i] *= -1;
+	stack->nb[i] *= -1;
+	while(stack->na[i] >= 0)
+	{
+		rrr(stack);
+		stack->na[i]--;
+		stack->nb[i]--;
+	}
+	while(stack->nb[i] >= 0)
+	{
+		rrb(stack);
+		stack->nb[i]--;
+	}
+	push_a(stack);
+}
+
 	if(stack->na[i] < 0 && stack->nb[i] > 0)
+
+void siatemiamolo_rra_rb(t_stack *stack)
+{
+	int i;
+	
+	i = what_a_n(stack);
+	stack->na[i] *= -1;
+	while(stack->nb[i] >= 0)
+	{
+		rb(stack);
+		stack->nb[i]--;
+	}
+	while(stack->na[i] >= 0)
+	{
+		rra(stack);
+		stack->na[i]--;
+	}
+	push_a(stack);
+}
 	if(stack->na[i] > 0 && stack->nb[i] < 0)
+
+void siatemiamolo_ra_rrb(t_stack *stack)
+{
+	int i;
+	
+	i = what_a_n(stack);
+	stack->nb[i] *= -1;
+	while(stack->na[i] >= 0)
+	{
+		ra(stack);
+		stack->na[i]--;
+	}
+	while(stack->nb[i] >= 0)
+	{
+		rrb(stack);
+		stack->nb[i]--;
+	}
+	push_a(stack);
 }
