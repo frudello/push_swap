@@ -6,7 +6,7 @@
 /*   By: frudello < frudello@student.42roma.it>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/07 14:14:32 by frudello          #+#    #+#             */
-/*   Updated: 2022/03/12 18:44:13 by frudello         ###   ########.fr       */
+/*   Updated: 2022/03/20 17:37:29 by frudello         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -192,6 +192,7 @@ void parsing_argument(t_stack *stack, char **argv, int argc)
 	stack->a = malloc(stack->count * sizeof(int));
 	stack->b = malloc(stack->count * sizeof(int));
 	stack->size_a = stack->count;
+	stack->size_b = 0;
 	i = 1;
 	while(i < argc)
 	{
@@ -217,7 +218,7 @@ int main(int argc, char **argv)
 		printf("%d\n", stack.a[i]);
 		i++;
 	}
-	printf("\nfinito\n");
+	// printf("\nfinito\n");
 	//swap_a(&stack);
 	i = 0;
 	// while (i < stack.size_a)
@@ -225,13 +226,13 @@ int main(int argc, char **argv)
 	// 	printf("%d\n", stack.a[i]);
 	// 	i++;
 	// }
-	rra(&stack);
-	printf("usciamo la a post ra\n");
-	while (i < stack.size_a)
-	{
-		printf("%d\n", stack.a[i]);
-		i++;
-	}
+	pusch_svap(&stack);
+	// printf("usciamol'a speriamo sia giusto\n");
+	// while (i < stack.size_a)
+	// {
+	// 	printf("%d\n", stack.a[i]);
+	// 	i++;
+	// }
 	/*
 	printf("usciamo il b\n");
 	i = 0;
