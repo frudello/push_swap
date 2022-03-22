@@ -6,7 +6,7 @@
 /*   By: frudello < frudello@student.42roma.it>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/07 14:13:32 by frudello          #+#    #+#             */
-/*   Updated: 2022/03/20 21:46:18 by frudello         ###   ########.fr       */
+/*   Updated: 2022/03/22 19:00:52 by frudello         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,6 +50,7 @@ void set_lis_flag(t_stack *stack)
 	int i;
 	
 	i = stack->size_a - 1;
+	// printf("la I in set_lis_fleg é: %d\n", i);
 	stack->lis_flag = (int *) malloc(sizeof(int) * stack->size_a);
 	while(i >= 0)
 	{
@@ -62,15 +63,21 @@ void set_lis_flag(t_stack *stack)
 			stack->lis_flag[i] = 0;
 		i--;
 	}
+	// printf("LA LIS FLAG É : ");
+	// for(int y = 0; y < stack->size_a; y++)
+	// 	printf(" %d, ", stack->lis_flag[y]);
+	// printf("\n");
 	free(stack->lis);
 }
 
 void max_n_int_order(t_stack *stack)
 {
 	int i;
+	int size;
 	
+	size = stack->size_a;
 	i = 0;
-	while(i < stack->size_a)
+	while(i < size)
 	{
 		if(stack->lis_flag[i] == 1)
 		{
@@ -100,25 +107,19 @@ void max_n_int_order(t_stack *stack)
 void fill_nb(t_stack *stack)
 {
 	int i;
-	int o;
-
+	
 	i = 0;
-	o = stack->size_b/-2;
 	stack->nb = (int *) malloc(sizeof(int) * stack->size_b);
 	// if(!na)
 	// 	return(0);
-	while(i <= stack->size_b/2)
+	while(i <= stack->size_b)
 	{
-		stack->nb[i] = i;
+		if(i > stack->size_b / 2)
+			stack->nb[i] = i - stack->size_b;
+		else
+			stack->nb[i] = i;
 		i++;
 		//printf("hai dei problemi\n");
-	}
-	while(i < stack->size_b)
-	{
-		o++;
-		stack->nb[i] = o;
-		i++;
-		// printf("mi piace il cazzo\n");
 	}
 	printf("la NB é: ");
 	for (int y = 0; y < stack->size_b; y++)
@@ -135,22 +136,29 @@ void fill_na(t_stack *stack)
 	while(i < stack->size_b)
 	{
 		// printf("arrivo nel primo while di fill_na\n");
-		o = 0;
+		o = 1;
+		// if(stack->b[i] > stack->a[stack->size_a - 1] && stack->b[i] < stack->a[o])
+		// {
+		// 	stack->na[i] = o;
+		// 	i++;
+		// }	
 		while(!(stack->b[i] > stack->a[o - 1] && stack->b[i] < stack->a[o]))
 		{
 			if(check_max(stack, i) >= 0)
 			{
+				printf("			sono entrato in check_MAX\n");
 				o = check_max(stack, i);
 				break;
 			}
 			if(check_min(stack, i) >= 0)
 			{
+				printf("			sono entrato in check_MIN\n");
 				o = check_min(stack, i );
 				break;
 			}
 			// if(stack->b[i] > stack->a[stack->size_a - 1] && stack->b[i] < stack->a[o])
 			 	// break;
-			o++;
+			o++;				
 		}
 		/*if(stack->b[i] > stack->a[o])
 		{
@@ -164,6 +172,8 @@ void fill_na(t_stack *stack)
 		if(o > stack->size_a/2)
 			o -= stack->size_a - 1;
 			*/
+		if(o > stack->size_a/2)
+			o -= stack->size_a;
 		stack->na[i] = o;
 		i++;
 	}
@@ -185,12 +195,17 @@ int what_a_n(t_stack *stack)
 	i = 0;
 	while(i < stack->size_b)
 	{
-		// printf("save é: %d\n", save);
 		tmp = how_many(stack, i);
+		// printf("how_many mi restituise: %d\n", tmp);
 		if(tmp < 0)
 			tmp *= -1;
+		// printf("la variabile MOSSE é: %d\n", mosse);
 		if(mosse > tmp)
+		{
 			save = i;
+			mosse = tmp;
+		}
+		// printf("save é: %d\n", save);
 		i++;
 	}
 	// printf("how_many mi restituisce %d\n", tmp);
@@ -217,9 +232,9 @@ int how_many(t_stack *stack, int i)
 			else
 				tmp = stack->nb[i];
 		}
-	if(stack->na[i] < 0 && stack->nb[i] > 0)
+	if(stack->na[i] <= 0 && stack->nb[i] >= 0)
 		tmp = (stack->na[i] * -1) + stack->nb[i];
-	if(stack->na[i] > 0 && stack->nb[i] < 0)
+	if(stack->na[i] >= 0 && stack->nb[i] <= 0)
 		tmp = stack->na[i] + (stack->nb[i] * -1);
 	// printf("tmp é: %d\n", tmp);
 	return(tmp);
@@ -269,14 +284,13 @@ int check_max(t_stack *stack, int i)
 	
 	o = 1;
 	j = 0;
-	while(stack->a[j] > stack->a[j + 1]) //calcolo errato del numero massimo
+	while(stack->a[j] < stack->a[o] && o < stack->size_a) //calcolo errato del numero massimo
 	{
-		if(stack->a[j] > stack->a[o])
-			j = o;
+		j = o;
 		o++;
 	}
 	if(stack->b[i] > stack->a[j])
-		return(j);
+		return(j + 1);
 	else
 		return(-1);
 }
@@ -288,9 +302,9 @@ int check_min(t_stack *stack, int i)
 	
 	o = 0;
 	j = 0;
-	while(o < stack->size_a - 1)
+	while(o < stack->size_a)
 	{
-		if(stack->a[j] < stack->a[o])
+		if(stack->a[j] > stack->a[o])
 			j = o;
 		o++;
 	}
@@ -310,29 +324,33 @@ void sistemiamolo(t_stack *stack)
 	// 	push_a(stack);
 	// 	write(1, "push_a\n", 7);
 	// }
-	if(stack->na[i] >= 0 && stack->nb[i] >= 0)
+	printf("	what_a_n mi restituisce: %d\n", i);
+	if(stack->na[i] > 0 && stack->nb[i] > 0)
 	{
 		if(stack->na[i] > stack->nb[i])
 			sistemiamolo_rr_ra(stack);
 		else
 			sistemiamolo_rr_rb(stack);
 	}
-	else if(stack->na[i] <= 0 && stack->nb[i] <= 0)
+	else if(stack->na[i] < 0 && stack->nb[i] < 0)
 	{
-		if(stack->na[i] < stack->nb[i])
+		if(stack->na[i] > stack->nb[i])
 			sistemiamolo_rrr_rrb(stack);
 		else
 			siatemiamolo_rrr_rra(stack);
 	}
-	else if(stack->na[i] < 0 && stack->nb[i] > 0)
+	else if(stack->na[i] <= 0 && stack->nb[i] >= 0)
 		siatemiamolo_rra_rb(stack);
-	else if(stack->na[i] > 0 && stack->nb[i] < 0)
+	else if(stack->na[i] >= 0 && stack->nb[i] <= 0)
 		siatemiamolo_ra_rrb(stack);
+	else if(stack->na[i] == 0 && stack->nb[i] == 0)
+		push_a(stack);
 	//printf("non penso che chi arrivi");
 }
 
 void sistemiamolo_rr_ra(t_stack *stack)
 {
+	printf("entro in rr_ra\n");
 	int i;
 
 	i = what_a_n(stack);
@@ -355,6 +373,7 @@ void sistemiamolo_rr_ra(t_stack *stack)
 
 void sistemiamolo_rr_rb(t_stack *stack)
 {
+	printf("entro in rr_rb\n");
 	int i;
 
 	i = what_a_n(stack);
@@ -378,12 +397,38 @@ void sistemiamolo_rr_rb(t_stack *stack)
 
 void siatemiamolo_rrr_rra(t_stack *stack)
 {
+	printf("entro in rrr_rra\n");
 	int i;
 	
 	i = what_a_n(stack);
 	stack->na[i] *= -1;
 	stack->nb[i] *= -1;
-	while(stack->nb[i] >= 0)
+	while(stack->nb[i] > 0)
+	{
+		rrr(stack);
+		stack->na[i]--;
+		stack->nb[i]--;
+		write(1, "rrr\n", 4);
+	}
+	while(stack->na[i] > 0)
+	{
+		rra(stack);
+		stack->na[i]--;
+		write(1, "rra\n", 4);
+	}
+	push_a(stack);
+	write(1, "push_a\n", 7);
+}
+
+void sistemiamolo_rrr_rrb(t_stack *stack)
+{
+	printf("entro in rrr_rrb\n");
+	int i;
+
+	i = what_a_n(stack);
+	stack->na[i] *= -1;
+	stack->nb[i] *= -1;
+	while(stack->nb[i] > 0)
 	{
 		rrr(stack);
 		stack->na[i]--;
@@ -394,30 +439,6 @@ void siatemiamolo_rrr_rra(t_stack *stack)
 	{
 		rrb(stack);
 		stack->na[i]--;
-		write(1, "rra\n", 4);
-	}
-	push_a(stack);
-	write(1, "push_a\n", 7);
-}
-
-void sistemiamolo_rrr_rrb(t_stack *stack)
-{
-	int i;
-
-	i = what_a_n(stack);
-	stack->na[i] *= -1;
-	stack->nb[i] *= -1;
-	while(stack->na[i] >= 0)
-	{
-		rrr(stack);
-		stack->na[i]--;
-		stack->nb[i]--;
-		write(1, "rrr\n", 4);
-	}
-	while(stack->nb[i] > 0)
-	{
-		rrb(stack);
-		stack->nb[i]--;
 		write(1, "rrb\n", 4);
 	}
 	push_a(stack);
@@ -428,6 +449,7 @@ void sistemiamolo_rrr_rrb(t_stack *stack)
 
 void siatemiamolo_rra_rb(t_stack *stack)
 {
+	printf("entro in rra_rb\n");
 	int i;
 	
 	i = what_a_n(stack);
@@ -451,6 +473,7 @@ void siatemiamolo_rra_rb(t_stack *stack)
 
 void siatemiamolo_ra_rrb(t_stack *stack)
 {
+	printf("entro in ra_rrb\n");
 	int i;
 	
 	i = what_a_n(stack);
