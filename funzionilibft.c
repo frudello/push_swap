@@ -1,6 +1,18 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   funzionilibft.c                                    :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: frudello < frudello@student.42roma.it>     +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2022/03/25 16:23:34 by frudello          #+#    #+#             */
+/*   Updated: 2022/03/25 17:35:33 by frudello         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "push_swap.h"
 
-int in_int(long long int rs)
+int	in_int(long long int rs)
 {
 	if (rs < -2147483648 || rs > 2147483647)
 	{
@@ -9,7 +21,6 @@ int in_int(long long int rs)
 	}
 	return (rs);
 }
-
 
 int	ft_atoi(const char *str)
 {
@@ -36,4 +47,3 @@ int	ft_atoi(const char *str)
 	}
 	return (in_int(res * s));
 }
-
