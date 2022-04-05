@@ -6,7 +6,7 @@
 #    By: frudello < frudello@student.42roma.it>     +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/01/10 12:36:05 by frudello          #+#    #+#              #
-#    Updated: 2022/04/02 19:10:13 by frudello         ###   ########.fr        #
+#    Updated: 2022/04/05 23:55:23 by frudello         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -16,22 +16,25 @@ NAME_BONUS	= checker
 CC 		= gcc
 CFLAGS	= -Wall -Wextra -Werror
 
-PUSH_SRCS =	funzionilibft.c								\
-			ft_split.c									\
-			rename.c									\
-			mosse.c										\
-			mosse1.c									\
-			mosse2.c									\
-			push_swap.c									\
-			finiamoloduro.c								\
-			sistemiamolo.c								\
-			sistemiamolo1.c								\
-			lis_na_nb.c									\
-			scit.c										\
+PUSH_SRCS =	funzionilibft.c	\
+			ft_split.c		\
+			rename.c		\
+			mosse.c			\
+			mosse1.c		\
+			mosse2.c		\
+			push_swap.c		\
+			finiamoloduro.c	\
+			sistemiamolo.c	\
+			sistemiamolo1.c	\
+			lis_na_nb.c		\
+			scit.c			\
 
-BONUS_SRCS = pushswapbonus.c							\
-			ft_split.c									\
-			
+BONUS_SRCS = pushswapbonus.c\
+			ft_split.c		\
+			funzionilibft.c	\
+			mosseBonus.c	\
+			mosse1Bonus.c	\
+			mosse2Bonus.c	\
 
 PUSH_OBJS	= ${PUSH_SRCS:.c=.o}
 
@@ -56,6 +59,6 @@ fclean: 	clean
 			rm -f $(NAME_CHECKER)
 			rm -f $(NAME_BONUS)
 
-re: fclean all
+re: fclean all bonus
 
 .PHONY: all clean fclean re push_swap
