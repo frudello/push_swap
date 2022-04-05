@@ -6,7 +6,7 @@
 #    By: frudello < frudello@student.42roma.it>     +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/01/10 12:36:05 by frudello          #+#    #+#              #
-#    Updated: 2022/04/05 23:55:23 by frudello         ###   ########.fr        #
+#    Updated: 2022/04/06 00:33:04 by frudello         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -30,6 +30,8 @@ PUSH_SRCS =	funzionilibft.c	\
 			scit.c			\
 
 BONUS_SRCS = pushswapbonus.c\
+			bonus2.c		\
+			bonus3.c		\
 			ft_split.c		\
 			funzionilibft.c	\
 			mosseBonus.c	\
