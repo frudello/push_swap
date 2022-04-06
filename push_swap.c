@@ -6,7 +6,7 @@
 /*   By: frudello < frudello@student.42roma.it>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/07 14:13:32 by frudello          #+#    #+#             */
-/*   Updated: 2022/03/29 13:39:21 by frudello         ###   ########.fr       */
+/*   Updated: 2022/04/06 16:19:45 by frudello         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -92,6 +92,7 @@ void	pusch_svap(t_stack *stack)
 	int	i;
 
 	i = 0;
+	ordinato(stack);
 	if (stack->size_a == 3)
 	{
 		tre_numeri(stack);

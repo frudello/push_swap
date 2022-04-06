@@ -6,7 +6,7 @@
 /*   By: frudello < frudello@student.42roma.it>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/02 18:59:39 by frudello          #+#    #+#             */
-/*   Updated: 2022/04/05 18:38:54 by frudello         ###   ########.fr       */
+/*   Updated: 2022/04/06 00:36:59 by frudello         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,5 +47,9 @@ void		rr(t_bonus *bonus);
 void		rra(t_bonus *bonus, int def);
 void		rrb(t_bonus *bonus, int def);
 void		rrr(t_bonus *bonus);
+void		ft_read_helper(t_bonus *bonus, char *save);
+void		which_move_helper(t_bonus *bonus, char *s);
+int			has_space(char *str);
+void		parsing_argument_help(t_bonus *bonus, char **argv, int argc);
 
 #endif

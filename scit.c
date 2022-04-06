@@ -6,7 +6,7 @@
 /*   By: frudello < frudello@student.42roma.it>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/25 18:13:11 by frudello          #+#    #+#             */
-/*   Updated: 2022/03/29 16:10:24 by frudello         ###   ########.fr       */
+/*   Updated: 2022/04/06 19:30:18 by frudello         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -109,6 +109,7 @@ int	alcontrario(t_stack *stack)
 	{
 		i++;
 	}
+	duenumeri(stack, i);
 	if (i == stack->size_a)
 	{
 		while (i > 0)

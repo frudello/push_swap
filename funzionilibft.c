@@ -6,7 +6,7 @@
 /*   By: frudello < frudello@student.42roma.it>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/25 16:23:34 by frudello          #+#    #+#             */
-/*   Updated: 2022/03/25 17:35:33 by frudello         ###   ########.fr       */
+/*   Updated: 2022/04/06 16:41:55 by frudello         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,9 +24,9 @@ int	in_int(long long int rs)
 
 int	ft_atoi(const char *str)
 {
-	int	c;
-	int	s;
-	int	res;
+	int			c;
+	int			s;
+	long int	res;
 
 	c = 0;
 	s = 1;

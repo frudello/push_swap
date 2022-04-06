@@ -6,7 +6,7 @@
 /*   By: frudello < frudello@student.42roma.it>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/09 15:02:10 by frudello          #+#    #+#             */
-/*   Updated: 2022/03/29 13:38:51 by frudello         ###   ########.fr       */
+/*   Updated: 2022/04/06 19:29:45 by frudello         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -73,5 +73,7 @@ void		parsing_argument_help(t_stack *stack, char **argv, int argc);
 void		s_nbr(char **contr);
 int			fill_na_help(t_stack *stack, int i);
 int			alcontrario(t_stack *stack);
+void		ordinato(t_stack *stack);
+void		duenumeri(t_stack *stack, int i);
 
 #endif
